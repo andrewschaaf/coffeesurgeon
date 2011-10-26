@@ -1,0 +1,24 @@
+{
+  "name": "coffeesurgeon",
+  "version": "0.0.1",
+  
+  "description": "Static {analysis,slicing,dicing} of your .coffee",
+  "url": "https://github.com/andrewschaaf/coffeesurgeon",
+  
+  "main": "lib/coffeesurgeon.js",
+  
+  "dependencies": {
+    "underscore": ">=1.1.7",
+    "async": ">=0.1.9",
+    "strftime": ">=0.4.6",
+    "moof": ">=0.0.7",
+    "tafa-misc-util": ">=0.1.6"
+  },
+  
+  "author": "Andrew Schaaf <andrew@andrewschaaf.com> (http://andrewschaaf.com)",
+  
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrewschaaf/coffeesurgeon.git"
+  }
+}
