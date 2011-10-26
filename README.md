@@ -1,8 +1,10 @@
 
 # Status: needs some work
 
+# Stuff
+
 <pre>
-{stitchBodies, parseImportsExports} = require 'coffeesurgeon'
+{stitchBodies, findSourceFile, parseImportsExports} = require 'coffeesurgeon'
 </pre>
 
 
