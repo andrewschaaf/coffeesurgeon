@@ -1,5 +1,4 @@
 
-fs = require 'fs'
 assert = require 'assert'
 cs = require 'coffee-script'
 _ = require 'underscore'
@@ -45,10 +44,11 @@ _extractImports = (coffee) ->
     break if x.value?.variable?.base?.value != 'require'
     names = (y.base.value for y in x.variable.base.properties)
     mod = x.value.args[0].base.value
+    mod = mod.match(/.(.+)./)[1]# TODO bettter
     imports.push [names, mod]
   
   if imports.length == 0
-    return {import:[], remaining_coffee:coffee}
+    return {imports:[], remaining_coffee:coffee}
   
   # TODO do this properly when line numbers arrive in coffee-script
   [names, mod] = _.last(imports)
@@ -60,12 +60,6 @@ _extractImports = (coffee) ->
     imports: imports
     remaining_coffee: remaining_coffee
   }
-
-
-if not module.parent
-  coffee = fs.readFileSync("../test/example/main.coffee").toString()
-  info = parseImportsExports coffee
-  console.log JSON.stringify(info)
 
 
 module.exports =
