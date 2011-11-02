@@ -41,10 +41,13 @@ bodystitch = ({codepath, main}, cb) ->
       # TODO more validation (name DNE, collisions, ...)
       
       arr = []
-      for path in deps_chain
+      _add = (path) ->
         arr.push "### #{path} ####\n\n"
         arr.push parseds[path].body
         arr.push '\n\n'
+      for path in deps_chain
+        _add path
+      _add mainPath
       coffee = arr.join ''
       
       cb null, {
