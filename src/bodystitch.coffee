@@ -34,17 +34,24 @@ bodystitch = ({codepath, main}, cb) ->
     willHaveBeenParsed = {}
     _handlePathAndItsPrereqs mainPath, codepath, deps, parseds, willHaveBeenParsed, (e) ->
       return cb e if e
-      chain = deps.getChain mainPath
+      
+      deps_chain = deps.getChain mainPath
+      deps_map = deps.map
+      
       # TODO more validation (name DNE, collisions, ...)
       
       arr = []
-      for path in chain
+      for path in deps_chain
         arr.push "### #{path} ####\n\n"
         arr.push parseds[path].body
         arr.push '\n\n'
       coffee = arr.join ''
       
-      cb null, {coffee:coffee}
+      cb null, {
+        coffee: coffee
+        deps_map: deps_map
+        deps_chain: deps_chain
+      }
 
 
 module.exports =

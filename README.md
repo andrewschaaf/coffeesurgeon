@@ -45,7 +45,7 @@ stitchBodies {
     '...'
     '...'
   ]
-}, (e, {coffee}) ->
+}, (e, {coffee, deps_map, deps_chain}) ->
 </pre>
 
 #### FAQ
