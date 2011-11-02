@@ -1,4 +1,5 @@
 
+_ = require 'underscore'
 fs = require 'fs'
 async = require 'async'
 DepGraph = require 'dep-graph'
@@ -8,16 +9,20 @@ DepGraph = require 'dep-graph'
 
 
 
-_handlePathAndItsPrereqs = (path, codepath, deps, parseds, cb) ->
+_handlePathAndItsPrereqs = (path, codepath, deps, parseds, willHaveBeenParsed, cb) ->
   fs.readFile path, (e, data) ->
     parsed = parseImportsExports data.toString 'utf-8'
     parseds[path] = parsed
     {exported_names, imports, body} = parsed
     f = ([names, fromQuery], cb2) ->
       findSourceFile query:fromQuery, fromDir:parentOf(path), codepath:codepath, (e, dependee) ->
-        throw new Error "Couldn't find #{fromQuery}" if not path
+        throw new Error "Couldn't find #{fromQuery} from #{path}" if not dependee
         deps.add path, dependee
-        _handlePathAndItsPrereqs dependee, codepath, deps, parseds, cb2
+        if willHaveBeenParsed[dependee]?
+          cb2 null
+        else
+          willHaveBeenParsed[dependee] = true
+          _handlePathAndItsPrereqs dependee, codepath, deps, parseds, willHaveBeenParsed, cb2
     async.forEach imports, f, cb
 
 
@@ -26,12 +31,10 @@ bodystitch = ({codepath, main}, cb) ->
     return cb e if e
     deps = new DepGraph
     parseds = {}
-    _handlePathAndItsPrereqs mainPath, codepath, deps, parseds, (e) ->
+    willHaveBeenParsed = {}
+    _handlePathAndItsPrereqs mainPath, codepath, deps, parseds, willHaveBeenParsed, (e) ->
       return cb e if e
-      
       chain = deps.getChain mainPath
-      chain.push mainPath
-      
       # TODO more validation (name DNE, collisions, ...)
       
       arr = []
