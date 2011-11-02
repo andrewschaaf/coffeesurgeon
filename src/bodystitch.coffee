@@ -54,6 +54,7 @@ bodystitch = ({codepath, main}, cb) ->
         coffee: coffee
         deps_map: deps_map
         deps_chain: deps_chain
+        main_path: mainPath
       }
 
 
