@@ -11,7 +11,7 @@
     "underscore": ">=1.1.7",
     "async": ">=0.1.9",
     "strftime": ">=0.4.6",
-    "dep-graph": ">=1.0.0",
+    "dep-graph": ">=1.0.1",
     "moof": ">=0.0.7",
     "tafa-misc-util": ">=0.1.6"
   },
