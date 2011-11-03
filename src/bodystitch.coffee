@@ -2,7 +2,7 @@
 _ = require 'underscore'
 fs = require 'fs'
 async = require 'async'
-DepGraph = require 'dep-graph'
+DepGraph = require './dep-graph'
 {findSourceFile} = require './findSourceFile'
 {parseImportsExports} = require './parseImportsExports'
 {deepcopy, parentOf} = require './util'
