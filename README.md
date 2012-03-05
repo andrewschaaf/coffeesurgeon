@@ -39,7 +39,7 @@ Like [stitch](https://github.com/sstephenson/stitch), but
   - *...and letting you expose your stuff (with <code>coffee --bare</code>) to your REPL and unit tests*
 
 <pre>
-stitchBodies {
+bodystitch {
   main: 'mymainfile'
   codepath: [
     '...'
