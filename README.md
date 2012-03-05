@@ -20,9 +20,7 @@ A `.coffee` satisfies "Property 1" if ALL of its imports and exports are of the 
 
     ...body, wherein foo and bar are defined...
 
-    module.exports =
-      foo: foo
-      bar: bar
+    module.exports = {foo, bar}
 
 
 ## bodystitch
