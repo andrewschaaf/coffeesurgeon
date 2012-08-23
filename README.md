@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/andrewschaaf/coffeesurgeon.png)](http://travis-ci.org/andrewschaaf/coffeesurgeon)
 
 # coffeesurgeon
 
